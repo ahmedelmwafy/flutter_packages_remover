@@ -19,5 +19,5 @@ dev_dependencies:
   test: ^1.24.0
 
 executables:
-  # Corrected the path to the main executable file
-  flutter_packages_remover: bin/flutter_packages_remover
+  flutter_packages_remover: 
+    main: flutter_packages_remover 
