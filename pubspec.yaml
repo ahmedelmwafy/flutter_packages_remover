@@ -20,4 +20,4 @@ dev_dependencies:
 
 executables:
   # Corrected the path to the main executable file
-  flutter_packages_remover: bin/flutter_packages_remover.dart
+  flutter_packages_remover: bin/flutter_packages_remover
