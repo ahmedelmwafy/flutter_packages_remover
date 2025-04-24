@@ -1,7 +1,7 @@
 name: flutter_packages_remover
 description: A command-line tool to find and remove unused packages from pubspec.yaml.
 version: 1.0.0
-
+homepage: https://github.com/ahmedelmwafy/flutter_packages_remover
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
@@ -15,3 +15,7 @@ dependencies:
 dev_dependencies:
   lints: ^3.0.0
   test: ^1.24.0
+
+
+executables:
+  flutter_packages_remover: bin/main.dart
