@@ -5,7 +5,7 @@ homepage: https://github.com/ahmedelmwafy/flutter_packages_remover
 
 environment:
   sdk: ">=2.18.0 <4.0.0"
-  flutter: ">=1.17.0"
+  # flutter: ">=1.17.0" # This tool is a pure Dart package, Flutter SDK is not required for the tool itself
 
 dependencies:
   analyzer: ^6.0.0 # To parse Dart code and find imports
@@ -19,4 +19,5 @@ dev_dependencies:
   test: ^1.24.0
 
 executables:
-  flutter_packages_remover: bin/unused_package_remover.dart 
+  # Corrected the path to the main executable file
+  flutter_packages_remover: bin/main.dart
