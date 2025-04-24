@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:args/args.dart';
 import 'package:path/path.dart' as p;
-import 'package:flutter_packages_remover/unused_package_remover.dart'; // Corrected import path
+import 'package:flutter_packages_remover/main.dart'; // Corrected import path
 
 void main(List<String> arguments) async {
   final parser = ArgParser()

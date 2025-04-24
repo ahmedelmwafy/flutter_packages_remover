@@ -19,4 +19,4 @@ dev_dependencies:
   test: ^1.24.0
 
 executables:
-  flutter_packages_remover: bin/main.dart 
+  flutter_packages_remover: bin/unused_package_remover.dart 
