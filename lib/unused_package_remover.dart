@@ -6,6 +6,10 @@ import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
+/// Finds unused packages in the 'dependencies' section of pubspec.yaml.
+///
+/// Analyzes Dart files in the project to determine which packages are actually
+/// imported and used.
 Future<List<String>> findUnusedPackages(String projectPath) async {
   final pubspecPath = p.join(projectPath, 'pubspec.yaml');
   final pubspecFile = File(pubspecPath);
@@ -48,9 +52,16 @@ Future<List<String>> findUnusedPackages(String projectPath) async {
     return declaredDependencies.toList(); // Assume all are unused if no code
   }
 
+  // Convert relative paths to absolute and normalized paths for the analyzer
+  final absoluteDartFilePaths = dartFilePaths.map((path) => p.normalize(p.absolute(path))).toList();
+
+
   // Analyze Dart files to find used imports
+  // Use the absolute and normalized paths for the AnalysisContextCollection
+  final collection = AnalysisContextCollection(includedPaths: absoluteDartFilePaths);
+
+  // Initialize usedPackages here within the function scope
   final usedPackages = <String>{};
-  final collection = AnalysisContextCollection(includedPaths: dartFilePaths);
 
   for (final context in collection.contexts) {
     for (final filePath in context.contextRoot.includedPaths) {

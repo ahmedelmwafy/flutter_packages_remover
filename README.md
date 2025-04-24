@@ -1,39 +1,47 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# flutter_packages_remover
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A command-line tool to help identify and interactively remove unused packages from your Dart/Flutter project's `pubspec.yaml`.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+---
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## ✨ Features
 
-## Features
+- 🔍 **Detect unused packages** by scanning Dart/Flutter files for import usage.
+- 🧹 **Interactive cleanup**: Choose which unused packages to keep or remove via an intuitive selection interface.
+- 💾 **Automatic backup** of your `pubspec.yaml` before making any changes.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+---
 
-## Getting started
+## 🚀 Getting Started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### 📦 Installation
 
-## Usage
+1. Clone the repository:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+    ```bash
+    git clone https://github.com/ahmedelmwafy/flutter_packages_remover.git
+    cd flutter_packages_remover
+    ```
 
-```dart
-const like = 'sample';
+2. Optionally, activate the tool globally:
+
+    ```bash
+    dart pub global activate --source path .
+    ```
+
+---
+
+## 🛠 Usage
+
+Navigate to the root directory of the Dart/Flutter project containing the `pubspec.yaml` you want to clean.
+
+
+### Interactively remove unused packages
+
+To remove unused packages interactively, run:
+
+```bash
+flutter_packages_remover --remove
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+The tool will display unused packages with corresponding numbers and prompt you to select the ones you wish to keep.
