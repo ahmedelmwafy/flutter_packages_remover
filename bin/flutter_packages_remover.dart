@@ -34,7 +34,6 @@ void main(List<String> arguments) async {
     exit(0);
   }
 
-  final bool listOnly = argResults['list'] || !argResults['remove'];
   final bool remove = argResults['remove'];
 
   String projectPath = '.'; // Default to current directory
@@ -84,7 +83,7 @@ void main(List<String> arguments) async {
               ?.split(RegExp(r'[,\s]+')) // Split by commas or spaces
               .where((s) => s.isNotEmpty)
               .map((s) => int.tryParse(s))
-              .where((n) => n != null && n! > 0 && n! <= unusedPackages.length)
+              .where((n) => n != null && n > 0 && n <= unusedPackages.length)
               .map((n) => n! - 1) // Convert to 0-based index
               .toSet(); // Use a Set to handle duplicates
 
