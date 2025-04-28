@@ -107,26 +107,30 @@ Future<void> removePackages(String pubspecPath, List<String> packagesToRemove) a
   // Create a backup
   await pubspecFile.copy('$pubspecPath.bak');
 
-  final editor = YamlEditor(pubspecContent);
+  try {
+    final editor = YamlEditor(pubspecContent);
 
-  final pubspecYaml = loadYaml(pubspecContent);
-  final dependencies = pubspecYaml['dependencies'];
-
-  if (dependencies is YamlMap) {
-      final newDependencies = Map.from(dependencies);
-      for (final package in packagesToRemove) {
-          newDependencies.remove(package);
+    // Remove each package individually instead of replacing the entire dependencies section
+    for (final package in packagesToRemove) {
+      try {
+        editor.remove(['dependencies', package]);
+        print('Removed package: $package');
+      } catch (e) {
+        print('Could not remove package $package: ${e.toString()}');
       }
-      // Use update to replace the dependencies map
-      editor.update(['dependencies'], newDependencies);
-  } else {
-      // If dependencies wasn't a map or didn't exist, just write the original content back
-      // (or handle this case differently if needed)
-      print('Warning: Could not find or parse dependencies map in pubspec.yaml. No changes made.');
-      return;
+    }
+
+    // Write the modified content back to pubspec.yaml
+    await pubspecFile.writeAsString(editor.toString());
+    print('Successfully updated pubspec.yaml');
+  } catch (e) {
+    // If there was an error, restore the backup
+    final backupFile = File('$pubspecPath.bak');
+    if (await backupFile.exists()) {
+      await backupFile.copy(pubspecPath);
+      print('Error occurred: ${e.toString()}');
+      print('Restored pubspec.yaml from backup');
+    }
+    rethrow;
   }
-
-
-  // Write the modified content back to pubspec.yaml
-  await pubspecFile.writeAsString(editor.toString());
 }
